@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="5dp"
+    app:cardBackgroundColor="#3A3A3A"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgUserProfile"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="24dp"
+                android:src="@drawable/uploadimg" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="3"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtUserFullName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="@font/comfortaabold"
+                    android:text="Rohit Anabhavane"
+                    android:textColor="#1CD6CE"
+                    android:textSize="12sp" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toEndOf="@+id/imgUserProfile"
+                    app:layout_constraintTop_toBottomOf="@+id/txtUserFullName">
+
+                    <TextView
+                        android:id="@+id/txtExp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/comfortaabold"
+                        android:text="Exp : "
+                        android:textColor="@color/white"
+                        android:textSize="11sp"
+                        app:layout_constraintEnd_toEndOf="@+id/txtUserFullName"
+                        app:layout_constraintStart_toStartOf="@+id/txtUserFullName"
+                        app:layout_constraintTop_toBottomOf="@+id/txtUserFullName" />
+
+                    <TextView
+                        android:id="@+id/txtUserExpYears"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/comfortaabold"
+                        android:text="12"
+                        android:textColor="@color/white"
+                        android:textSize="11sp"
+                        app:layout_constraintEnd_toEndOf="@+id/txtUserFullName"
+                        app:layout_constraintStart_toStartOf="@+id/txtUserFullName"
+                        app:layout_constraintTop_toBottomOf="@+id/txtUserFullName" />
+
+
+                    <TextView
+                        android:id="@+id/txtExpYears"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/comfortaabold"
+                        android:text=" Years "
+                        android:textColor="@color/white"
+                        android:textSize="11sp"
+                        app:layout_constraintEnd_toEndOf="@+id/txtUserFullName"
+                        app:layout_constraintStart_toStartOf="@+id/txtUserFullName"
+                        app:layout_constraintTop_toBottomOf="@+id/txtUserFullName" />
+
+
+                    <TextView
+                        android:id="@+id/txtExpMonths"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/comfortaabold"
+                        android:text="10"
+                        android:textColor="@color/white"
+                        android:textSize="11sp"
+                        app:layout_constraintEnd_toEndOf="@+id/txtUserFullName"
+                        app:layout_constraintStart_toStartOf="@+id/txtUserFullName"
+                        app:layout_constraintTop_toBottomOf="@+id/txtUserFullName" />
+
+                    <TextView
+                        android:id="@+id/txtUserExpMonths"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/comfortaabold"
+                        android:text=" Months"
+                        android:textColor="@color/white"
+                        android:textSize="11sp"
+                        app:layout_constraintEnd_toEndOf="@+id/txtUserFullName"
+                        app:layout_constraintStart_toStartOf="@+id/txtUserFullName"
+                        app:layout_constraintTop_toBottomOf="@+id/txtUserFullName" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_gravity="center|end"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txtViews"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="00"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/comfortaabold"
+                    android:layout_marginEnd="10dp"/>
+
+                <ImageView
+                    android:id="@+id/imgViews"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/rating"/>
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="5dp"
+            android:background="#635666" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtGroupFees"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/comfortaabold"
+                        android:text="0000"
+                        android:textAlignment="center"
+                        android:textColor="#1CD6CE"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/comfortaabold"
+                        android:text="Fees"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="11sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtUserCity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/comfortaabold"
+                        android:text="Mumbai"
+                        android:textAlignment="center"
+                        android:textColor="#1CD6CE"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/comfortaabold"
+                        android:text="Location"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="11sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtSportsType"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/comfortaabold"
+                        android:text="Football"
+                        android:textAlignment="center"
+                        android:textColor="#1CD6CE"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/comfortaabold"
+                        android:text="Sports Type"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="11sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtAge"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/comfortaabold"
+                        android:text="24"
+                        android:textAlignment="center"
+                        android:textColor="#1CD6CE"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/comfortaabold"
+                        android:text="Age"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="11sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

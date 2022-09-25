@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.rohitanabhavane.coachsir">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.CoachSir">
+        <activity
+            android:name=".Activities.UpdateAddressActivity"
+            android:theme="@style/Theme.CoachHome"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.UpdateDescActivity"
+            android:exported="false"
+            android:theme="@style/Theme.CoachHome" />
+        <activity
+            android:name=".Activities.ViewProfileActivity"
+            android:exported="false"
+            android:theme="@style/Theme.CoachHome"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.CoachHomePageActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashScreen" />
+        <activity
+            android:name=".Activities.EditProfileImgActivity"
+            android:theme="@style/Theme.CoachHome"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.OTPVerificationActivity"
+            android:exported="false"
+            android:theme="@style/Theme.CoachHome"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.FilterActivity"
+            android:theme="@style/Theme.CoachHome"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.EditProfileActivity"
+            android:theme="@style/Theme.CoachHome"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.BecomeACoachActivity"
+            android:theme="@style/Theme.CoachHome"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.ProfileActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.CoachHome" />
+        <activity
+            android:name=".Activities.PreferenceActivity"
+            android:exported="false"
+            android:theme="@style/Theme.CoachHome"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.ForgotPasswordActivity"
+            android:theme="@style/Theme.CoachHome"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.SignUpActivity"
+            android:theme="@style/Theme.CoachHome"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.LoginActivity"
+            android:theme="@style/Theme.CoachHome"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.LoginOrSignUpActivity"
+            android:theme="@style/Theme.CoachHome"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.CoachHome"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.SplashScreen"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

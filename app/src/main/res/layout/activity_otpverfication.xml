@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/Coach_BG"
+    android:orientation="vertical"
+    android:scrollbars="none"
+    tools:context=".Activities.OTPVerificationActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="30dp">
+
+        <ImageView
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:src="@drawable/otpbg"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/bebas"
+            android:text="OTP Verification"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="38sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/comfortaalight"
+            android:text="Enter One Time Password Sent on"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/txtMobileNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:fontFamily="@font/comfortaabold"
+            android:text="+91 8879595423"
+            android:textAlignment="center"
+            android:textColor="@color/light_blue"
+            android:textSize="16sp" />
+
+        <com.chaos.view.PinView
+            android:id="@+id/PinView"
+            style="@style/PinWidget.PinView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:cursorVisible="true"
+            android:fontFamily="@font/comfortaalight"
+            android:gravity="center"
+            android:inputType="number"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:cursorColor="@color/light_blue"
+            app:cursorWidth="2dp"
+            app:itemCount="6"
+            app:itemHeight="48dp"
+            app:itemRadius="4dp"
+            app:itemSpacing="5dp"
+            app:lineColor="@color/white"
+            app:lineWidth="2dp"
+            app:viewType="rectangle" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnOTPVerify"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/white"
+                    android:fontFamily="@font/comfortaabold"
+                    android:padding="10dp"
+                    android:text="Verify"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:cornerRadius="10dp" />
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnResentOTPDisable"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#B9FFF8"
+                        android:enabled="false"
+                        android:fontFamily="@font/comfortaabold"
+                        android:padding="10dp"
+                        android:text="Resend OTP"
+                        android:textColor="@color/Coach_BG"
+                        android:textSize="16sp"
+                        android:visibility="visible"
+                        app:cornerRadius="10dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnResentOTPEnable"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/light_blue"
+                        android:enabled="true"
+                        android:fontFamily="@font/comfortaabold"
+                        android:padding="10dp"
+                        android:text="Resend OTP"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        app:cornerRadius="10dp" />
+
+
+                </FrameLayout>
+
+            </LinearLayout>
+        </FrameLayout>
+
+
+    </LinearLayout>
+
+</ScrollView>

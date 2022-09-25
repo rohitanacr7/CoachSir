@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="10dp"
+    android:background="#DFEAF0"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/itemFrom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/comfortaabold"
+        android:text="00"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/itemAMPM1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:fontFamily="@font/comfortaabold"
+        android:text="AM"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/itemFrom"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/itemDash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:fontFamily="@font/comfortaabold"
+        android:text="-"
+        android:textColor="@color/red"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/itemAMPM1"
+        app:layout_constraintStart_toEndOf="@+id/itemAMPM1"
+        app:layout_constraintTop_toTopOf="@+id/itemAMPM1" />
+
+    <TextView
+        android:id="@+id/itemTo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:fontFamily="@font/comfortaabold"
+        android:text="00"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/itemAMPM1"
+        app:layout_constraintStart_toEndOf="@+id/itemDash"
+        app:layout_constraintTop_toTopOf="@+id/itemAMPM1" />
+
+    <TextView
+        android:id="@+id/itemAMPM2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:fontFamily="@font/comfortaabold"
+        android:text="AM"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/itemTo"
+        app:layout_constraintEnd_toStartOf="@+id/imgTrainingTimeDelete"
+        app:layout_constraintStart_toEndOf="@+id/itemTo"
+        app:layout_constraintTop_toTopOf="@+id/itemTo" />
+
+    <ImageView
+        android:id="@+id/imgTrainingTimeDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/red_close"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    app:cardBackgroundColor="@color/edt_bg"
+    app:cardCornerRadius="20dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="22dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/customerReviewProfile"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/uploadimg"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/customerReviewFullName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="26dp"
+            android:fontFamily="@font/bebas"
+            android:text="Rohit Anabhavane"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/customerReviewProfile"
+            app:layout_constraintTop_toTopOf="@+id/customerReviewProfile" />
+
+        <ImageView
+            android:id="@+id/customerReviewStar"
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="3dp"
+            android:src="@drawable/reveiw4"
+            app:layout_constraintStart_toEndOf="@+id/customerReviewProfile"
+            app:layout_constraintTop_toBottomOf="@+id/customerReviewFullName" />
+
+        <TextView
+            android:id="@+id/customerReviewComment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/comfortaalight"
+            android:text="@string/desc"
+            android:textColor="@color/white"
+            android:textSize="11sp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/customerReviewProfile"
+            tools:layout_editor_absoluteX="18dp" />
+
+        <TextView
+            android:id="@+id/customerReviewDateTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/comfortaabold"
+            android:text="18/09/2022 12:43:46"
+            android:textColor="#FA7070"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/customerReviewComment" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
