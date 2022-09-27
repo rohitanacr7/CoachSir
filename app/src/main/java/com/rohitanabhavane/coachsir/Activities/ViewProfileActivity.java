@@ -220,22 +220,26 @@ public class ViewProfileActivity extends AppCompatActivity {
         firebaseFirestore.collection("User")
                 .document(strEmail)
                 .collection("Rating")
+                .document(strEmail)
                 .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            if (task.isSuccessful()) {
-                                RatingListener();
-                                txtCustomerReviewHead.setVisibility(View.VISIBLE);
-                                rvRating.setVisibility(View.VISIBLE);
-                            } else if (!task.isSuccessful()){
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            Map<String, Object> map = document.getData();
+                            if (map.size() == 0) {
                                 txtCustomerReviewHead.setVisibility(View.GONE);
                                 rvRating.setVisibility(View.GONE);
+                            } else {
+                                txtCustomerReviewHead.setVisibility(View.VISIBLE);
+                                rvRating.setVisibility(View.VISIBLE);
+                                RatingListener();
                             }
                         }
                     }
-                }).addOnFailureListener(new OnFailureListener() {
+                })
+                .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(ViewProfileActivity.this, "Error :" + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -425,6 +429,5 @@ public class ViewProfileActivity extends AppCompatActivity {
                     }
                 });
     }
-
 
 }
