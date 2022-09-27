@@ -47,6 +47,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class ViewProfileActivity extends AppCompatActivity {
 
@@ -212,7 +213,7 @@ public class ViewProfileActivity extends AppCompatActivity {
     private void Rating() {
         ratingModel = new RatingModel();
         rvRating.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ViewProfileActivity.this, LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ViewProfileActivity.this, LinearLayoutManager.VERTICAL, false);
         rvRating.setLayoutManager(linearLayoutManager);
         ratingModelArrayList = new ArrayList<RatingModel>();
         ratingAdapter = new RatingAdapter(this, ratingModelArrayList);
@@ -220,15 +221,16 @@ public class ViewProfileActivity extends AppCompatActivity {
         firebaseFirestore.collection("User")
                 .document(strEmail)
                 .collection("Rating")
-                .document(strEmail)
                 .get()
-                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        DocumentSnapshot document = task.getResult();
-                        if (document.exists()) {
-                            Map<String, Object> map = document.getData();
-                            if (map.size() == 0) {
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            int count = 0;
+                            for (DocumentSnapshot document : task.getResult()) {
+                                count++;
+                            }
+                            if (count == 0) {
                                 txtCustomerReviewHead.setVisibility(View.GONE);
                                 rvRating.setVisibility(View.GONE);
                             } else {
@@ -236,6 +238,8 @@ public class ViewProfileActivity extends AppCompatActivity {
                                 rvRating.setVisibility(View.VISIBLE);
                                 RatingListener();
                             }
+                        } else {
+                            Toast.makeText(ViewProfileActivity.this, Objects.requireNonNull(task.getException()).toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 })
