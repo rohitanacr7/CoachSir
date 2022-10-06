@@ -11,10 +11,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:fontFamily="@font/bebas"
-        android:letterSpacing=".1"
-        android:text="Review"
+        android:text="Update Review"
         android:textColor="@color/white"
-        android:textSize="34sp"
+        android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -91,21 +90,21 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnReviewSubmit"
+            android:id="@+id/btnUpdateReviewSubmit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             android:backgroundTint="@color/light_blue"
             android:fontFamily="@font/comfortaabold"
             android:padding="10dp"
-            android:text="Submit"
+            android:text="Update"
             android:textColor="@color/black"
             android:textSize="12sp"
             android:textStyle="bold"
             app:cornerRadius="10dp" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnReviewCancel"
+            android:id="@+id/btnUpdateReviewCancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
