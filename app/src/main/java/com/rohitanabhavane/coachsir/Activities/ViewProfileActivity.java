@@ -96,6 +96,40 @@ public class ViewProfileActivity extends AppCompatActivity {
 
     }
 
+    private void Initialization() {
+        //FireBase Firestore
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        //FireBase Authentication
+        mAuth = FirebaseAuth.getInstance();
+        //FireBase Storage
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+
+        if (mAuth.getCurrentUser() != null) {
+            loggedInEmail = mAuth.getCurrentUser().getEmail();
+        }
+
+        bthProfileBack = findViewById(R.id.bthProfileBack);
+        rvSkills = findViewById(R.id.rvViewSkills);
+        rvTrainingTime = findViewById(R.id.rvViewTrainingTime);
+        rvRating = findViewById(R.id.rvRating);
+        ProfileImg = findViewById(R.id.viewProfileImg);
+        txtFullName = findViewById(R.id.viewFullName);
+        txtDesc = findViewById(R.id.viewDesc);
+        txtDesc = findViewById(R.id.viewDesc);
+        txtExpYear = findViewById(R.id.viewExpYear);
+        txtExpMonth = findViewById(R.id.viewExpMonths);
+        txtTrainingGroundDetails = findViewById(R.id.viewTrainingGroundDetails);
+        txtGroupTrainingFees = findViewById(R.id.viewGroupCoachFees);
+        txtPersonalTrainingFees = findViewById(R.id.viewPersonalCoachFees);
+        txtSportType = findViewById(R.id.viewCoachSportType);
+        btnReview = findViewById(R.id.btnReview);
+        txtCustomerReviewHead = findViewById(R.id.txtCustomerReviewHead);
+        btnUpdateReview = findViewById(R.id.btnUpdateReview);
+        txtTotalReviews = findViewById(R.id.txtTotalReviews);
+
+    }
+
     private void Buttons() {
         bthProfileBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,6 +194,56 @@ public class ViewProfileActivity extends AppCompatActivity {
                     }
                 });
 
+        firebaseFirestore.collection("User")
+                .document(strEmail)
+                .collection("Rating")
+                .document(strEmail)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        DocumentSnapshot documentSnapshot = task.getResult();
+                        assert documentSnapshot != null;
+
+                        if (documentSnapshot.exists() && documentSnapshot.getData() != null) {
+                            btnReview.setVisibility(View.INVISIBLE);
+                            btnUpdateReview.setVisibility(View.VISIBLE);
+                        } else {
+                            btnReview.setVisibility(View.VISIBLE);
+                            btnUpdateReview.setVisibility(View.INVISIBLE);
+                        }
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(ViewProfileActivity.this, "Error :" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+    }
+
+    private void RatingListener() {
+        firebaseFirestore.collection("User")
+                .document(strEmail)
+                .collection("Rating")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value,
+                                        @Nullable FirebaseFirestoreException error) {
+                        if (error != null) {
+                            Log.e("Firestore Error", error.getMessage());
+                            return;
+                        }
+                        for (DocumentChange dc : value.getDocumentChanges()) {
+                            if (dc.getType() == DocumentChange.Type.ADDED) {
+                                ratingModelArrayList.add(dc.getDocument().toObject(RatingModel.class));
+                            }
+                            ratingAdapter.notifyDataSetChanged();
+                        }
+                    }
+                });
     }
 
     private void ReviewDialogBox() {
@@ -242,14 +326,14 @@ public class ViewProfileActivity extends AppCompatActivity {
                                                 }
                                             });
                                 }
-                            }).addOnFailureListener(new OnFailureListener() {
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
                                     Toast.makeText(ViewProfileActivity.this, "Error :" + e.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             });
                 }
-
                 dialog.dismiss();
             }
         });
@@ -273,25 +357,25 @@ public class ViewProfileActivity extends AppCompatActivity {
         btnSubmitReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateReviewRatingBar = dialog.findViewById(R.id.reviewUpdateRatingBar);
-                edtUpdateRatingComment = dialog.findViewById(R.id.edtUpdateRatingComment);
-                strRatingComment = edtRatingComment.getText().toString();
+                updateReviewRatingBar = updateDialog.findViewById(R.id.reviewUpdateRatingBar);
+                edtUpdateRatingComment = updateDialog.findViewById(R.id.edtUpdateRatingComment);
+                strUpdateRatingComment = edtRatingComment.getText().toString();
                 if (!strRatingComment.isEmpty()) {
 
                     int ratingCount = (int) reviewRatingBar.getRating();
                     String rating = String.valueOf(ratingCount);
 
-                    Map<String, Object> ratingMap = new HashMap<>();
-                    ratingMap.put("FullName", strLoggedFullName);
-                    ratingMap.put("Comment", strRatingComment);
-                    ratingMap.put("Email", loggedInEmail);
-                    ratingMap.put("Mobile", strLoggedMobile);
-                    ratingMap.put("ProfileImgLink", strLoggedProfile);
-                    ratingMap.put("rating", rating);
+                    Map<String, Object> updateRatingMap = new HashMap<>();
+                    updateRatingMap.put("FullName", strLoggedFullName);
+                    updateRatingMap.put("Comment", strRatingComment);
+                    updateRatingMap.put("Email", loggedInEmail);
+                    updateRatingMap.put("Mobile", strLoggedMobile);
+                    updateRatingMap.put("ProfileImgLink", strLoggedProfile);
+                    updateRatingMap.put("rating", rating);
 
                     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
                     Date date = new Date();
-                    ratingMap.put("RatingDateTime", formatter.format(date));
+                    updateRatingMap.put("RatingDateTime", formatter.format(date));
 
                     Map<String, Object> updateRating = new HashMap<>();
                     if (ratingCount == 1) {
@@ -326,7 +410,7 @@ public class ViewProfileActivity extends AppCompatActivity {
                                             .document(strEmail)
                                             .collection("Rating")
                                             .document(loggedInEmail)
-                                            .update(ratingMap)
+                                            .update(updateRatingMap)
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void unused) {
@@ -335,14 +419,16 @@ public class ViewProfileActivity extends AppCompatActivity {
                                                     startActivity(intent);
 
                                                 }
-                                            }).addOnFailureListener(new OnFailureListener() {
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
                                                 @Override
                                                 public void onFailure(@NonNull Exception e) {
                                                     Toast.makeText(ViewProfileActivity.this, "Error :" + e.getMessage(), Toast.LENGTH_SHORT).show();
                                                 }
                                             });
                                 }
-                            }).addOnFailureListener(new OnFailureListener() {
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
                                     Toast.makeText(ViewProfileActivity.this, "Error :" + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -350,13 +436,13 @@ public class ViewProfileActivity extends AppCompatActivity {
                             });
                 }
 
-                dialog.dismiss();
+                updateDialog.dismiss();
             }
         });
         btnCancelReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.dismiss();
+                updateDialog.dismiss();
             }
         });
     }
@@ -420,40 +506,6 @@ public class ViewProfileActivity extends AppCompatActivity {
                 });
     }
 
-    private void Initialization() {
-        //FireBase Firestore
-        firebaseFirestore = FirebaseFirestore.getInstance();
-        //FireBase Authentication
-        mAuth = FirebaseAuth.getInstance();
-        //FireBase Storage
-        storage = FirebaseStorage.getInstance();
-        storageReference = storage.getReference();
-
-        if (mAuth.getCurrentUser() != null) {
-            loggedInEmail = mAuth.getCurrentUser().getEmail();
-        }
-
-        bthProfileBack = findViewById(R.id.bthProfileBack);
-        rvSkills = findViewById(R.id.rvViewSkills);
-        rvTrainingTime = findViewById(R.id.rvViewTrainingTime);
-        rvRating = findViewById(R.id.rvRating);
-        ProfileImg = findViewById(R.id.viewProfileImg);
-        txtFullName = findViewById(R.id.viewFullName);
-        txtDesc = findViewById(R.id.viewDesc);
-        txtDesc = findViewById(R.id.viewDesc);
-        txtExpYear = findViewById(R.id.viewExpYear);
-        txtExpMonth = findViewById(R.id.viewExpMonths);
-        txtTrainingGroundDetails = findViewById(R.id.viewTrainingGroundDetails);
-        txtGroupTrainingFees = findViewById(R.id.viewGroupCoachFees);
-        txtPersonalTrainingFees = findViewById(R.id.viewPersonalCoachFees);
-        txtSportType = findViewById(R.id.viewCoachSportType);
-        btnReview = findViewById(R.id.btnReview);
-        txtCustomerReviewHead = findViewById(R.id.txtCustomerReviewHead);
-        btnUpdateReview = findViewById(R.id.btnUpdateReview);
-        txtTotalReviews = findViewById(R.id.txtTotalReviews);
-
-    }
-
     private void Skills() {
         skillsModel = new SkillsModels();
         rvSkills.setHasFixedSize(true);
@@ -483,28 +535,6 @@ public class ViewProfileActivity extends AppCompatActivity {
                                 skillsModelArrayList.add(dc.getDocument().toObject(SkillsModels.class));
                             }
                             viewSkillsAdapter.notifyDataSetChanged();
-                        }
-                    }
-                });
-    }
-
-    private void RatingListener() {
-        firebaseFirestore.collection("User")
-                .document(strEmail)
-                .collection("Rating")
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot value,
-                                        @Nullable FirebaseFirestoreException error) {
-                        if (error != null) {
-                            Log.e("Firestore Error", error.getMessage());
-                            return;
-                        }
-                        for (DocumentChange dc : value.getDocumentChanges()) {
-                            if (dc.getType() == DocumentChange.Type.ADDED) {
-                                ratingModelArrayList.add(dc.getDocument().toObject(RatingModel.class));
-                            }
-                            ratingAdapter.notifyDataSetChanged();
                         }
                     }
                 });
