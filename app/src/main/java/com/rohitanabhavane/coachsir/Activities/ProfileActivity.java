@@ -1,6 +1,8 @@
 package com.rohitanabhavane.coachsir.Activities;
 
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.rohitanabhavane.coachsir.R;
+import com.rohitanabhavane.coachsir.utilities.NetworkChangeListener;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -116,5 +119,20 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
     }
 }

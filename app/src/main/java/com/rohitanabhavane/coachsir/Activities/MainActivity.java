@@ -5,12 +5,14 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
@@ -21,6 +23,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -41,6 +44,7 @@ import com.rohitanabhavane.coachsir.Adapter.CoachesAdapter;
 import com.rohitanabhavane.coachsir.Model.BannerModel;
 import com.rohitanabhavane.coachsir.Model.CoachesModel;
 import com.rohitanabhavane.coachsir.R;
+import com.rohitanabhavane.coachsir.utilities.NetworkChangeListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -64,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     Boolean isFiltered = true;
     LocationManager locationManager;
     TextView txtLocation;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,6 +165,21 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         grantPermission();
         checkLocationIsEnabledOrNot();
         getLocation();
+    }
+
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
     }
 
     private void EventBannerChangeListener() {

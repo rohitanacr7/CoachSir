@@ -1,6 +1,8 @@
 package com.rohitanabhavane.coachsir.Activities;
 
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -22,6 +24,7 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.rohitanabhavane.coachsir.R;
+import com.rohitanabhavane.coachsir.utilities.NetworkChangeListener;
 
 import java.util.concurrent.TimeUnit;
 
@@ -92,6 +95,21 @@ public class OTPVerificationActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
     }
 
     private void sendVerificationCodeToUser(String strMobileNumber) {

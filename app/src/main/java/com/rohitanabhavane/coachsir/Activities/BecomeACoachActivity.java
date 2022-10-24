@@ -5,6 +5,8 @@ import static com.rohitanabhavane.coachsir.utilities.Constants.isCoach;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -50,6 +52,7 @@ import com.rohitanabhavane.coachsir.Adapter.TrainingTimeAdapter;
 import com.rohitanabhavane.coachsir.Model.SkillsModels;
 import com.rohitanabhavane.coachsir.Model.TrainingTimeModel;
 import com.rohitanabhavane.coachsir.R;
+import com.rohitanabhavane.coachsir.utilities.NetworkChangeListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -450,6 +453,21 @@ public class BecomeACoachActivity extends AppCompatActivity
                 }
             }
         });
+    }
+
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
     }
 
     private void DataRetrieve() {

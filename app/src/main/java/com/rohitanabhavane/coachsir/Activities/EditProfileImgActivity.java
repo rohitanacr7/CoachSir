@@ -2,6 +2,8 @@ package com.rohitanabhavane.coachsir.Activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -26,6 +28,7 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.rohitanabhavane.coachsir.R;
+import com.rohitanabhavane.coachsir.utilities.NetworkChangeListener;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -93,6 +96,21 @@ public class EditProfileImgActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
     }
 
     @Override

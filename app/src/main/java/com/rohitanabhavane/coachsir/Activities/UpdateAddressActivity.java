@@ -2,7 +2,9 @@ package com.rohitanabhavane.coachsir.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.IntentFilter;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.rohitanabhavane.coachsir.R;
+import com.rohitanabhavane.coachsir.utilities.NetworkChangeListener;
 
 public class UpdateAddressActivity extends AppCompatActivity {
 
@@ -217,5 +220,20 @@ public class UpdateAddressActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
     }
 }

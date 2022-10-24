@@ -3,6 +3,8 @@ package com.rohitanabhavane.coachsir.Activities;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -41,6 +43,7 @@ import com.rohitanabhavane.coachsir.Model.RatingModel;
 import com.rohitanabhavane.coachsir.Model.SkillsModels;
 import com.rohitanabhavane.coachsir.Model.TrainingTimeModel;
 import com.rohitanabhavane.coachsir.R;
+import com.rohitanabhavane.coachsir.utilities.NetworkChangeListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -94,6 +97,21 @@ public class ViewProfileActivity extends AppCompatActivity {
         UpdateReviewDialogBox();
         Buttons();
 
+    }
+
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListener);
+        super.onStop();
     }
 
     private void Initialization() {
